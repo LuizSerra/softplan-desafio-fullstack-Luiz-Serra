@@ -15,13 +15,23 @@ import org.springframework.stereotype.Service;
 
 import com.softplan.core.model.Parecer;
 import com.softplan.core.model.Parecer.Id;
+import com.softplan.core.model.Processo;
+import com.softplan.core.model.Usuario;
 import com.softplan.core.repository.ParecerRepository;
+import com.softplan.core.repository.ProcessoRepository;
+import com.softplan.core.repository.UsuarioRepository;
 
 @Service
 public class ParecerService {
 
 	@Autowired
 	ParecerRepository parecerRepository;
+	
+	@Autowired
+    UsuarioRepository usuarioRepository;
+	
+	@Autowired
+    ProcessoRepository processoRepository;
 
 	public List<Parecer> getAll(Integer pageNo, Integer pageSize, String sortBy) {
 		Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
@@ -33,6 +43,8 @@ public class ParecerService {
 			return new ArrayList<Parecer>();
 		}
 	}
+	
+	
 	
 	public Parecer create(Parecer parecer) {
 		return parecerRepository.save(parecer);
@@ -61,7 +73,25 @@ public class ParecerService {
 		return parecerAtualizado.get();
 	}
 
-	
+	public List<Parecer> getAllByUsers(Long idUsuario) {
+		Usuario usuario =  usuarioRepository.findById(idUsuario).get();
+		List<Parecer> result = parecerRepository.findByUsuario(usuario);
+		if (!result.isEmpty()) {
+			return result;
+		} else {
+			return new ArrayList<Parecer>();
+		}
+	}
+
+	public List<Parecer> getAllByProcess(Long idProcesso) {
+		Processo processo =  processoRepository.findById(idProcesso).get();
+		List<Parecer> result = parecerRepository.findByProcesso(processo);
+		if (!result.isEmpty()) {
+			return result;
+		} else {
+			return new ArrayList<Parecer>();
+		}
+	}
 
 	
 }

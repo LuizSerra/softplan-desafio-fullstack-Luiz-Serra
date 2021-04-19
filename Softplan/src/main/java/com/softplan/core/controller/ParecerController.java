@@ -36,18 +36,30 @@ public class ParecerController {
 	@Autowired
 	ParecerRepository parecerRepository;
 	
-	
 	@GetMapping
-    public ResponseEntity<List<Parecer>> getAllUsers(
+    public ResponseEntity<List<Parecer>> getAll(
                         @RequestParam(defaultValue = "0") Integer pageNo, 
                         @RequestParam(defaultValue = "10") Integer pageSize,
                         @RequestParam(defaultValue = "id") String sortBy) 
     {
         List<Parecer> pareceres = parecerService.getAll(pageNo, pageSize, sortBy);
- 
+  
         return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
     }
 	
+	@GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<Parecer>> getAllByUsers(@PathVariable Long idUsuario) 
+    {
+        List<Parecer> pareceres = parecerService.getAllByUsers(idUsuario); 
+        return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
+    }
+	
+	@GetMapping("/processo/{idProcesso}")
+    public ResponseEntity<List<Parecer>> getAllByProcess(@PathVariable Long idProcesso) 
+    {
+        List<Parecer> pareceres = parecerService.getAllByUsers(idProcesso); 
+        return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
+    }
 		
 	@PostMapping
 	public ResponseEntity<Parecer> criar(@Valid @RequestBody Parecer parecer, HttpServletResponse response) {
