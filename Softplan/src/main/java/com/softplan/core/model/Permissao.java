@@ -6,8 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="permissao")
+@Entity(name="permissao")
+@Table(schema = "testdb")
 public class Permissao {
 	
 	@Id

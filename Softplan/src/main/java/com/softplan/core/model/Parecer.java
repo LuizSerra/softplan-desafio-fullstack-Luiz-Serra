@@ -11,10 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 //Tabela de relacionamento entre Usuario e Processo, e contem um atributo mensagem
 
 @Entity(name = "parecer")
+@Table(schema = "testdb")
 public class Parecer {
 
 	@EmbeddedId

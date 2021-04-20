@@ -13,10 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "usuario")
+@Table(schema = "testdb")
 public class Usuario {
 
 	@Id
@@ -28,7 +30,7 @@ public class Usuario {
 	private boolean ativo;
 
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="usuario_permissao", joinColumns=@JoinColumn(name="id_usuario"),
+	@JoinTable(name="usuario_permissao", schema = "testdb", joinColumns=@JoinColumn(name="id_usuario"),
 	inverseJoinColumns=@JoinColumn(name="id_permissao"))
 	private List<Permissao> permissoes;
 	

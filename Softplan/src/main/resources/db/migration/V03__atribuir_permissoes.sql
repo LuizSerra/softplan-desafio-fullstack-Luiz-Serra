@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS usuario_permissao (
+CREATE TABLE IF NOT EXISTS testdb.usuario_permissao (
     id_usuario BIGINT(20) NOT NULL,
     id_permissao BIGINT(20) NOT NULL,
     PRIMARY KEY (id_usuario, id_permissao),
@@ -8,15 +8,10 @@ CREATE TABLE IF NOT EXISTS usuario_permissao (
 
 
 -- admin
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (1, 4);
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (1, 5);
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (1, 6);
+INSERT INTO testdb.usuario_permissao (id_usuario, id_permissao) VALUES (1, 1);
 
 --triador
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (2, 1);
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (2, 2);
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (2, 3);
+INSERT INTO testdb.usuario_permissao (id_usuario, id_permissao) VALUES (2, 2);
 
 --finalizador
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (3, 7);
-INSERT INTO usuario_permissao (id_usuario, id_permissao) VALUES (3, 8);
+INSERT INTO testdb.usuario_permissao (id_usuario, id_permissao) VALUES (3, 3);
