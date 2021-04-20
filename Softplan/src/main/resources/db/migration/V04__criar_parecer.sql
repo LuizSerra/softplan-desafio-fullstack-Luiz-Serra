@@ -21,4 +21,3 @@ CREATE TABLE IF NOT EXISTS parecer (
 
 
 INSERT INTO parecer (id_usuario, id_processo, descricao) VALUES (3, 1, 'A COMPRA PODE SER EFETUADA SEM LICITAÇÃO');
-

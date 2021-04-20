@@ -2,15 +2,10 @@ package com.softplan.core.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.softplan.core.model.Parecer;
@@ -34,11 +29,9 @@ public class ParecerService {
     ProcessoRepository processoRepository;
 
 	public List<Parecer> getAll(Integer pageNo, Integer pageSize, String sortBy) {
-		Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-
-		Page<Parecer> pagedResult = parecerRepository.findAll(paging);
-		if (pagedResult.hasContent()) {
-			return pagedResult.getContent();
+		List<Parecer> pagedResult = (List<Parecer>) parecerRepository.findAll();
+		if (!pagedResult.isEmpty()) {
+			return pagedResult;
 		} else {
 			return new ArrayList<Parecer>();
 		}
@@ -51,30 +44,30 @@ public class ParecerService {
 	}
 	
 	public Parecer update(Id id, Parecer parecer) {
-		Parecer parecerEncontrado = findById(id);
+		Parecer parecerEncontrado = findOne(id);
 
 		BeanUtils.copyProperties(parecer, parecerEncontrado, "id");
 		return parecerRepository.save(parecerEncontrado);
 	}
 
 	public void delete(Id id) {
-		Parecer processoEncontrado = findById(id);
+		Parecer processoEncontrado = findOne(id);
 		if (processoEncontrado == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		parecerRepository.delete(processoEncontrado);
 	}
 	
-	private Parecer findById(Id id) {
-		Optional<Parecer> parecerAtualizado = parecerRepository.findById(id);
+	private Parecer findOne(Id id) {
+		Parecer parecerAtualizado = parecerRepository.findOne(id);
 		if (parecerAtualizado == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return parecerAtualizado.get();
+		return parecerAtualizado;
 	}
 
 	public List<Parecer> getAllByUsers(Long idUsuario) {
-		Usuario usuario =  usuarioRepository.findById(idUsuario).get();
+		Usuario usuario =  usuarioRepository.findOne(idUsuario);
 		List<Parecer> result = parecerRepository.findByUsuario(usuario);
 		if (!result.isEmpty()) {
 			return result;
@@ -84,7 +77,7 @@ public class ParecerService {
 	}
 
 	public List<Parecer> getAllByProcess(Long idProcesso) {
-		Processo processo =  processoRepository.findById(idProcesso).get();
+		Processo processo =  processoRepository.findOne(idProcesso);
 		List<Parecer> result = parecerRepository.findByProcesso(processo);
 		if (!result.isEmpty()) {
 			return result;

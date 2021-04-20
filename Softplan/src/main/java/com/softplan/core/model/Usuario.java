@@ -27,7 +27,7 @@ public class Usuario {
 	private String senha;
 	private boolean ativo;
 
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="usuario_permissao", joinColumns=@JoinColumn(name="id_usuario"),
 	inverseJoinColumns=@JoinColumn(name="id_permissao"))
 	private List<Permissao> permissoes;

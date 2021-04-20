@@ -2,15 +2,10 @@ package com.softplan.core.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.softplan.core.model.Processo;
@@ -23,11 +18,11 @@ public class ProcessoService {
 	ProcessoRepository processoRepository;
 
 	public List<Processo> getAllProcesses(Integer pageNo, Integer pageSize, String sortBy) {
-		Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+		
 
-		Page<Processo> pagedResult = processoRepository.findAll(paging);
-		if (pagedResult.hasContent()) {
-			return pagedResult.getContent();
+		List<Processo> pagedResult = (List<Processo>) processoRepository.findAll();
+		if (!pagedResult.isEmpty()) {
+			return pagedResult;
 		} else {
 			return new ArrayList<Processo>();
 		}
@@ -53,11 +48,11 @@ public class ProcessoService {
 	}
 	
 	private Processo findById(Long id) {
-		Optional<Processo> processoAtualizado = processoRepository.findById(id);
+		Processo processoAtualizado = processoRepository.findOne(id);
 		if (processoAtualizado == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return processoAtualizado.get();
+		return processoAtualizado;
 	}
 
 	

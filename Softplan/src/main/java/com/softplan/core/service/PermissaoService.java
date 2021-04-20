@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.softplan.core.model.Permissao;
@@ -21,14 +17,12 @@ public class PermissaoService {
      
     public List<Permissao> getAllPermissons(Integer pageNo, Integer pageSize, String sortBy)
     {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
- 
-        Page<Permissao> pagedResult = permissaoRepository.findAll(paging);
+       List<Permissao> pagedResult = (List<Permissao>) permissaoRepository.findAll();
          
-        if(pagedResult.hasContent()) {
-            return pagedResult.getContent();
-        } else {
-            return new ArrayList<Permissao>();
-        }
+       if (!pagedResult.isEmpty()) {
+			return pagedResult;
+		} else {
+			return new ArrayList<Permissao>();
+		}
     }
 }
