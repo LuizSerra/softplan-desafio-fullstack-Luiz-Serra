@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ public class ParecerController {
 	@Autowired
 	ParecerRepository parecerRepository;
 	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
 	@GetMapping
     public ResponseEntity<List<Parecer>> getAll(
                         @RequestParam(defaultValue = "0") Integer pageNo, 
@@ -47,6 +49,7 @@ public class ParecerController {
         return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
     }
 	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
 	@GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<List<Parecer>> getAllByUsers(@PathVariable Long idUsuario) 
     {
@@ -54,13 +57,15 @@ public class ParecerController {
         return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
     }
 	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
 	@GetMapping("/processo/{idProcesso}")
     public ResponseEntity<List<Parecer>> getAllByProcess(@PathVariable Long idProcesso) 
     {
         List<Parecer> pareceres = parecerService.getAllByUsers(idProcesso); 
         return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
     }
-		
+	
+	@PreAuthorize("hasAnyAuthority('TRIADOR')")
 	@PostMapping
 	public ResponseEntity<Parecer> criar(@Valid @RequestBody Parecer parecer, HttpServletResponse response) {
 		
@@ -71,6 +76,7 @@ public class ParecerController {
 		return ResponseEntity.created(uri).body(processoCriado);
 	}
 	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
 	@PutMapping("/{idUsuario}/{idProcesso}")
 	public ResponseEntity<Parecer> atualizar(@PathVariable Long idUsuario, @PathVariable Long idProcesso,  @Valid @RequestBody Parecer parecer, HttpServletResponse response) {
 		Id compositeId = new Id();
@@ -82,7 +88,7 @@ public class ParecerController {
 		
 		return ResponseEntity.created(uri).body(processoAtualizado);
 	}
-	
+	@PreAuthorize("hasAnyAuthority('ADM')")
 	@DeleteMapping("/{idUsuario}/{idProcesso}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long idUsuario, @PathVariable Long idProcesso){

@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,7 @@ public class ProcessoController {
 	@Autowired
 	ProcessoRepository processoRepository;
 	
-	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
 	@GetMapping
     public ResponseEntity<List<Processo>> getAllUsers(
                         @RequestParam(defaultValue = "0") Integer pageNo, 
@@ -47,7 +48,7 @@ public class ProcessoController {
         return !processos.isEmpty() ? ResponseEntity.ok(processos) : ResponseEntity.noContent().build();
     }
 	
-		
+	@PreAuthorize("hasAnyAuthority('TRIADOR')")
 	@PostMapping
 	public ResponseEntity<Processo> criar(@Valid @RequestBody Processo processo, HttpServletResponse response) {
 		
@@ -57,7 +58,7 @@ public class ProcessoController {
 		
 		return ResponseEntity.created(uri).body(processoCriado);
 	}
-	
+	@PreAuthorize("hasAnyAuthority('TRIADOR')")
 	@PutMapping("/{id}")
 	public ResponseEntity<Processo> atualizar(@PathVariable Long id, @Valid @RequestBody Processo processo, HttpServletResponse response) {
 		Processo processoAtualizado = processoService.update(id, processo);
@@ -66,7 +67,7 @@ public class ProcessoController {
 		
 		return ResponseEntity.created(uri).body(processoAtualizado);
 	}
-	
+	@PreAuthorize("hasAnyAuthority('ADM')")
 	@DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long id){

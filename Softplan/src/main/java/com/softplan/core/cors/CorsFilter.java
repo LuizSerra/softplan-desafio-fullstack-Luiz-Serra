@@ -1,4 +1,4 @@
-package com.example.algamoney.api.cors;
+package com.softplan.core.cors;
 
 import java.io.IOException;
 
@@ -11,12 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import com.example.algamoney.api.config.property.AlgamoneyApiProperty;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)

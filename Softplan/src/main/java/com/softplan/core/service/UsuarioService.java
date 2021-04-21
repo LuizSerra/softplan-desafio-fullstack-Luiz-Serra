@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.softplan.core.model.Usuario;
@@ -39,7 +40,9 @@ public class UsuarioService {
 	}
 
 	public Usuario create(Usuario usuario) {
+		BCryptPasswordEncoder enconder =  new BCryptPasswordEncoder();
 		usuario.setAtivo(true);
+		usuario.setSenha(enconder.encode(usuario.getSenha()));
 		return usuarioRepository.save(usuario);
 	}
 	
