@@ -11,11 +11,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TooltipModule} from 'primeng/tooltip';
 import {DropdownModule} from 'primeng/dropdown';
 import {PasswordModule} from 'primeng/password';
+import {PickListModule} from 'primeng/picklist';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { UsuariosPesquisaComponent } from './usuarios-pesquisa/usuarios-pesquisa.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProcessosPesquisaComponent } from './processos-pesquisa/processos-pesquisa.component';
 import { UsuariosCadastroComponent } from './usuarios-cadastro/usuarios-cadastro.component';
+import { ProcessosCadastroComponent } from './processos-cadastro/processos-cadastro.component';
 
 
 @NgModule({
@@ -24,7 +27,8 @@ import { UsuariosCadastroComponent } from './usuarios-cadastro/usuarios-cadastro
     UsuariosPesquisaComponent,
     NavbarComponent,
     ProcessosPesquisaComponent,
-    UsuariosCadastroComponent
+    UsuariosCadastroComponent,
+    ProcessosCadastroComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import { UsuariosCadastroComponent } from './usuarios-cadastro/usuarios-cadastro
     BrowserAnimationsModule,
     TooltipModule,
     DropdownModule,
-    PasswordModule
+    PasswordModule,
+    PickListModule,
+    InputTextareaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
