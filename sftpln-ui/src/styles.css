@@ -32,20 +32,9 @@ body {
       margin-right: 20px !important;
   }
 
-  .col-valor {
-    width: 120px;
-    text-align: right;
-  }
-  
-  .col-data {
-    width: 120px;
-    text-align: center;
-  }
-  
-  .col-acoes {
-    width: 90px !important;
-    text-align: center;
-  }
+  td .p-button {
+    margin-right: 5px !important;
+   } 
   
   /* essa configuração é devido ao desalinhamento dos botoes na tabela no chrome */
   .p-component .p-button-icon-only .p-button-text, .p-button-text-empty .p-button-text {

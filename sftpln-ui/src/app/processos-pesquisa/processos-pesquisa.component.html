@@ -1,5 +1,5 @@
 <div class="container">
-    <form style="width: 100%;">
+    <form>
         <div class="p-grid pesquisa">
         <div class="p-col-12">
           <h1>Processos</h1>
@@ -18,7 +18,7 @@
       </form>
   
     <div class="p-grid">
-      <p-table [value]="processos" styleClass="p-datatable-gridlines p-datatable-striped"
+      <p-table [value]="processos" styleClass="p-datatable-gridlines p-datatable-striped" [responsive]="true"
       [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
           currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} registros" [rowsPerPageOptions]="[10,25,50]">
         <ng-template pTemplate="header">
