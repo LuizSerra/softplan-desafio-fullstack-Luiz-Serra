@@ -29,7 +29,7 @@ export class ProcessosCadastroComponent implements OnInit {
     console.log(form)
   }
 
-  get editando() {
-    return Boolean(false);
+  get triador() {
+    return Boolean(true);
   }
 }

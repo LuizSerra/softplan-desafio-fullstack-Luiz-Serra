@@ -7,17 +7,22 @@
 
             <div class="p-field p-col-12 p-md-9">
                 <label>Nome</label>
-                <input type="text" pInputText name="nome" ngModel/>
+                <input type="text" pInputText name="nome" ngModel />
             </div>
-            <div class="p-field p-col-12 p-md-9" style="width: 100%;">
+            <div class="p-field p-col-12 p-md-9">
                 <label class="p-col-12">Descrição</label>
-                <textarea  pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" ngModel></textarea>
+                <textarea pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" ngModel></textarea>
             </div>
-            <div class="p-field p-col-12" *ngIf="!editando">
+            <div class=" p-field p-col-12 p-md-9" *ngIf="!triador">
+                <label class="p-col-12">Parecer</label>
+                <textarea pInputTextarea name="parecer" style="width: 100%; max-width: 100%;" ngModel></textarea>
+            </div>
+
+            <div class="p-field p-col-12  p-md-9" *ngIf="triador">
                 <h3>Selecionar usuário(s) para emitir parecer:</h3>
-                <p-pickList [source]="listaUsuariosOrigem" [target]="listaUsuariosDestino" sourceHeader="Disponíveis" targetHeader="Selecionados" dragdrop="true"
-                [responsive]="true" filterBy="nome"
-                sourceFilterPlaceholder="Buscar por nome" targetFilterPlaceholder="Buscar por nome">>
+                <p-pickList [source]="listaUsuariosOrigem" [target]="listaUsuariosDestino" sourceHeader="Disponíveis"
+                    targetHeader="Selecionados" dragdrop="true" [responsive]="true" filterBy="nome"
+                    sourceFilterPlaceholder="Buscar por nome" targetFilterPlaceholder="Buscar por nome">>
                     <ng-template let-usuario pTemplate="item">
                         <div>
                             <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{usuario.nome}}</div>
@@ -27,9 +32,9 @@
             </div>
         </div>
         <div class="p-col-12 p-md-10">
-           <button pButton type="button" label="Limpar" class="p-button-info"></button>
-           <button pButton type="submit" label="Salvar"></button>
-           <a href="javascript:;"> Voltar para a Listagem de Usuários</a>
-       </div>
+            <button pButton type="button" label="Limpar" class="p-button-info"></button>
+            <button pButton type="submit" label="Salvar"></button>
+            <a href="javascript:;"> Voltar para a Listagem de Processos</a>
+        </div>
     </form>
 </div>
