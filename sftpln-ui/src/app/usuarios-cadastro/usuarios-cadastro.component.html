@@ -1,0 +1,31 @@
+<div class="container">
+    <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-12">
+                <h1>Novo Usuário</h1>
+            </div>
+
+            <div class="p-field p-col-12 p-md-9">
+                <label>Nome</label>
+                <input type="text" pInputText name="nome" ngModel/>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label>Papel</label>
+               <p-dropdown name="papel" [options]="permissoes" [(ngModel)]="permissaoSelecionada" optionLabel="descricao" placeholder="Selecione" ngModel></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-5">
+                <label>E-mail</label>
+                <input type="text" pInputText name="email" ngModel/>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label>Senha</label>
+                <p-password name="senha" ngModel promptLabel="Digite uma senha" weakLabel="Senha fraca" mediumLabel="Senha razoável" strongLabel="Senha forte"></p-password>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-10">
+           <button pButton type="button" label="Limpar" class="p-button-info"></button>
+           <button pButton type="submit" label="Salvar"></button>
+           <a href="javascript:;"> Voltar para a Listagem de Usuários</a>
+       </div>
+    </form>
+</div>
