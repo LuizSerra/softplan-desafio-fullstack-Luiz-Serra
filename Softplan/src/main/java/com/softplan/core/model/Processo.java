@@ -3,6 +3,7 @@ package com.softplan.core.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Processo {
 	private String descricao;
 	
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "processo")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "processo", cascade = CascadeType.ALL)
 	private Set<Parecer> parecer =	new HashSet<Parecer>(0);
 
 	public Long getId() {

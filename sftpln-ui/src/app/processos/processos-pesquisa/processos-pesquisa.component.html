@@ -7,12 +7,12 @@
   
         <div class="p-col-12 p-fluid">
           <label>Nome</label>
-          <input type="text" pInputText name="nome" />
+          <input type="text" pInputText name="nome" #nome="ngModel" ngModel/>
         </div>
         
   
         <div class="p-col-12">
-          <a pButton type="submit" label="Pesquisar"></a>
+          <a pButton type="submit" label="Pesquisar"(click)="filtrar(nome.value)" ></a>
         </div>
     </div>
       </form>
@@ -33,8 +33,8 @@
                 <td>{{processo.nome}}</td>
                 <td>{{processo.descricao}}</td>
                 <td>
-                  <button type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" (click)="editUser(product)"></button>
-                  <button type="button" pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="deleteUser(product)"></button>
+                  <button type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" (click)="editar(processo)"></button>
+                  <button type="button" pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(processo)"></button>
                 </td>
             </tr>
         </ng-template>
