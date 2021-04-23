@@ -26,7 +26,7 @@ public class Processo {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "processo", cascade = CascadeType.ALL)
-	private Set<Parecer> parecer =	new HashSet<Parecer>(0);
+	private Set<Parecer> parecer;
 
 	public Long getId() {
 		return id;

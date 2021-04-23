@@ -7,11 +7,11 @@
 
             <div class="p-field p-col-12 p-md-9">
                 <label>Nome</label>
-                <input type="text" pInputText name="nome" ngModel />
+                <input type="text" pInputText name="nome" #nome [(ngModel)] ="processo.nome"  />
             </div>
             <div class="p-field p-col-12 p-md-9">
                 <label class="p-col-12">Descrição</label>
-                <textarea pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" ngModel></textarea>
+                <textarea pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" #nome [(ngModel)] ="processo.descricao"></textarea>
             </div>
             <div class=" p-field p-col-12 p-md-9" *ngIf="!triador">
                 <label class="p-col-12">Parecer</label>

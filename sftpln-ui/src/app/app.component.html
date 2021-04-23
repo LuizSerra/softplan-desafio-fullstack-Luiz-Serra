@@ -1,7 +1,5 @@
 <app-navbar></app-navbar>
 <p-toast></p-toast>
-<app-processos-pesquisa></app-processos-pesquisa>
-
 <p-confirmDialog #cd [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
         <h2 >Confimação</h2>
@@ -12,7 +10,8 @@
         <button type="button" pButton icon="pi pi-check" label="Sim" (click)="cd.accept()"></button>
     </ng-template>
 </p-confirmDialog>
-<!-- <app-processos-cadastro></app-processos-cadastro>
 <app-processos-pesquisa></app-processos-pesquisa>
+<app-processos-cadastro></app-processos-cadastro>
+<!--<app-processos-pesquisa></app-processos-pesquisa>
 <app-usuarios-cadastro></app-usuarios-cadastro>
 <app-usuarios-pesquisa></app-usuarios-pesquisa> -->

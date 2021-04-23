@@ -1,3 +1,5 @@
+import { ProcessoService } from './../processo.service';
+import { Processo } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcessosCadastroComponent implements OnInit {
 
-  constructor() { }
+  constructor(private processoService:ProcessoService) { }
 
   ngOnInit(): void {
     this.listaUsuariosOrigem = this.usuarios;
@@ -25,8 +27,17 @@ export class ProcessosCadastroComponent implements OnInit {
 
   listaUsuariosDestino: any[];
 
+  processo = new Processo();
+
   salvar(form) {
-    console.log(form)
+    console.log(this.processo)
+   let teste = this.processoService.salvar(this.processo).subscribe(resp => console.log(resp));
+  }
+
+  criarPendenciaParecer(Processo){
+    /*
+    Criar o servico de parecer e injetar nessa classe,
+    criar um parecer usando o id do processo retornado por funçao de criar/atualizar e cada id da lista usuarioDestino*/
   }
 
   get triador() {

@@ -1,3 +1,4 @@
+import { Processo } from './../core/model';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -27,6 +28,12 @@ export class ProcessoService {
       catchError(this.handleError.handleError));
   }
 
+salvar(processo: Processo): Observable<Processo>  {
+  //this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
+  
+  return this.http.post<Processo>(`${this.url}`, processo, this.httpOptions).pipe(
+      catchError(this.handleError.handleError));;
+  }
 
   excluir(id: number):Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`, this.httpOptions).pipe(
