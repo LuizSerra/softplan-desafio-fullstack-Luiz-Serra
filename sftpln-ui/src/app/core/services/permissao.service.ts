@@ -7,7 +7,7 @@ import { ErrorHandlerService } from '../error-handler.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PermissoesService {
+export class PermissaoService {
 
   constructor(
     private http: HttpClient,

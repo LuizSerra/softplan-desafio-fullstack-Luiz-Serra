@@ -20,7 +20,7 @@ export class Usuario {
     email: string;
     senha: string;
     ativo: boolean;
-    permissoes: Permissao[];
+    permissoes = Array<Permissao>();
 }
 
 export class Permissao {

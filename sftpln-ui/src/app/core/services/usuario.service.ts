@@ -45,7 +45,7 @@ export class UsuarioService {
   atualizar(usuario: Usuario): Observable<Usuario> {
     //this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
 
-    return this.http.post<Usuario>(`${this.url}/${usuario.id}`, usuario, this.httpOptions).pipe(
+    return this.http.put<Usuario>(`${this.url}/${usuario.id}`, usuario, this.httpOptions).pipe(
       catchError(this.handleError.handleError));;
   }
 

@@ -2,30 +2,30 @@
     <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-col-12">
-                <h1>Novo Usuário</h1>
+                <h1>{{ editando ? 'Edição de' : 'Novo'}} Usuário</h1>
             </div>
 
             <div class="p-field p-col-12 p-md-9">
                 <label>Nome</label>
-                <input type="text" pInputText name="nome" [(ngModel)] ="usuario.nome"/>
+                <input type="text" pInputText name="nome" [(ngModel)] ="usuario.nome" required/>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label>Papel</label>
-               <p-dropdown name="papel" [options]="permissoes" [(ngModel)]="permissaoSelecionada" optionLabel="descricao" placeholder="Selecione" ngModel></p-dropdown>
+               <p-dropdown name="papel" [options]="permissoes" [(ngModel)]="permissaoSelecionada" optionLabel="descricao" placeholder="Selecione" ngModel required></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-5">
                 <label>E-mail</label>
-                <input type="text" pInputText name="email" [(ngModel)] ="usuario.email"/>
+                <input type="text" pInputText name="email" [(ngModel)] ="usuario.email" required/>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label>Senha</label>
-                <p-password name="senha" ngModel promptLabel="Digite uma senha" weakLabel="Senha fraca" mediumLabel="Senha razoável" strongLabel="Senha forte"></p-password>
+                <p-password name="senha" ngModel promptLabel="Digite uma senha" weakLabel="Senha fraca" mediumLabel="Senha razoável" strongLabel="Senha forte" [(ngModel)] ="usuario.senha" required></p-password>
             </div>
         </div>
         <div class="p-col-12 p-md-10">
             <button pButton type="button" label="Novo" class="p-button-info" (click)="novo(usuarioForm)"></button>
             <button pButton type="submit" label="Salvar" [disabled]="usuarioForm.invalid"></button>
-           <a outerLink="/usuarios"> Voltar para a Listagem de Usuários</a>
+           <a routerLink="/usuarios"> Voltar para a Listagem de Usuários</a>
        </div>
     </form>
 </div>

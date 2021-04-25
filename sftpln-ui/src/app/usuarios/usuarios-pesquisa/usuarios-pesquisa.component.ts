@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Usuario } from 'src/app/core/model';
+import { PermissaoService } from 'src/app/core/services/permissao.service';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 @Component({
@@ -28,8 +29,6 @@ export class UsuariosPesquisaComponent implements OnInit {
     this.usuarioService.pesquisar().subscribe((resp: Usuario[]) => this.usuarios = resp);
   }
 
-  
-  
   filtrar(filtro: String) {
 
     if (filtro && filtro != "") {
