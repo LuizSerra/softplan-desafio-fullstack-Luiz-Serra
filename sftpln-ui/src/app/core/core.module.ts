@@ -8,18 +8,21 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
 
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,
     ConfirmDialogModule,
-    ToastModule],
+    ToastModule,
+    ],
   providers: [
     MessageService,
     ConfirmationService,
