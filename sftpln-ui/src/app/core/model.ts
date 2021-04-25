@@ -20,5 +20,10 @@ export class Usuario {
     email: string;
     senha: string;
     ativo: boolean;
+    permissoes: Permissao[];
 }
 
+export class Permissao {
+    id: number;
+    descricao: string;
+}

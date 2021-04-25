@@ -7,7 +7,7 @@
 
             <div class="p-field p-col-12 p-md-9">
                 <label>Nome</label>
-                <input type="text" pInputText name="nome" ngModel/>
+                <input type="text" pInputText name="nome" [(ngModel)] ="usuario.nome"/>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label>Papel</label>
@@ -15,7 +15,7 @@
             </div>
             <div class="p-field p-col-12 p-md-5">
                 <label>E-mail</label>
-                <input type="text" pInputText name="email" ngModel/>
+                <input type="text" pInputText name="email" [(ngModel)] ="usuario.email"/>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label>Senha</label>
@@ -23,8 +23,8 @@
             </div>
         </div>
         <div class="p-col-12 p-md-10">
-           <button pButton type="button" label="Limpar" class="p-button-info"></button>
-           <button pButton type="submit" label="Salvar"></button>
+            <button pButton type="button" label="Novo" class="p-button-info" (click)="novo(usuarioForm)"></button>
+            <button pButton type="submit" label="Salvar" [disabled]="usuarioForm.invalid"></button>
            <a outerLink="/usuarios"> Voltar para a Listagem de Usuários</a>
        </div>
     </form>
