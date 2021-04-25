@@ -58,7 +58,7 @@ public class ParecerService {
 		parecerRepository.delete(processoEncontrado);
 	}
 	
-	private Parecer findOne(Id id) {
+	public Parecer findOne(Id id) {
 		Parecer parecerAtualizado = parecerRepository.findOne(id);
 		if (parecerAtualizado == null) {
 			throw new EmptyResultDataAccessException(1);

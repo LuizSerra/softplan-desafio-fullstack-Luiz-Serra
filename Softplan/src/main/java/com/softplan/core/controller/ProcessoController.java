@@ -48,6 +48,14 @@ public class ProcessoController {
         return !processos.isEmpty() ? ResponseEntity.ok(processos) : ResponseEntity.noContent().build();
     }
 	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
+	@GetMapping("/{id}")
+    public ResponseEntity<Processo> getByID(@PathVariable Long id) 
+    {
+		Processo processoEncontrado = processoService.findById(id);
+		return processoEncontrado != null ? ResponseEntity.ok().body(processoEncontrado) : ResponseEntity.notFound().build();
+    }
+	
 	@PreAuthorize("hasAnyAuthority('TRIADOR')")
 	@PostMapping
 	public ResponseEntity<Processo> criar(@Valid @RequestBody Processo processo, HttpServletResponse response) {
@@ -67,6 +75,7 @@ public class ProcessoController {
 		
 		return ResponseEntity.created(uri).body(processoAtualizado);
 	}
+	
 	@PreAuthorize("hasAnyAuthority('ADM')")
 	@DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

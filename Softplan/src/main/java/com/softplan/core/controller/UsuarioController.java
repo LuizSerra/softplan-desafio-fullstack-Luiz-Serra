@@ -59,6 +59,15 @@ public class UsuarioController {
  
         return !usuarios.isEmpty() ? ResponseEntity.ok(usuarios) : ResponseEntity.noContent().build();
     }
+	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
+	@GetMapping("/{id}")
+    public ResponseEntity<Usuario> getByID(@PathVariable Long id) 
+    {
+		Usuario usuarioEncontrado = usuarioService.findById(id);
+		return usuarioEncontrado != null ? ResponseEntity.ok().body(usuarioEncontrado) : ResponseEntity.notFound().build();
+    }
+	
 	@PreAuthorize("hasAnyAuthority('ADM')")
 	@PostMapping
 	public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario, HttpServletResponse response) {

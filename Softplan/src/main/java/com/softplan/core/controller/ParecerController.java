@@ -50,6 +50,16 @@ public class ParecerController {
     }
 	
 	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
+	@GetMapping("/{idUsuario}/{idProcesso}")
+	public ResponseEntity<Parecer> getParecerById(@PathVariable Long idUsuario, @PathVariable Long idProcesso) {
+		Id compositeId = new Id();
+		compositeId.setIdUsuario(idUsuario);
+		compositeId.setIdProcesso(idProcesso);
+		Parecer parecerEncontrado = parecerService.findOne(compositeId);
+		return parecerEncontrado != null ? ResponseEntity.ok().body(parecerEncontrado) : ResponseEntity.notFound().build();
+	}
+	
+	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
 	@GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<List<Parecer>> getAllByUsers(@PathVariable Long idUsuario) 
     {
@@ -61,7 +71,7 @@ public class ParecerController {
 	@GetMapping("/processo/{idProcesso}")
     public ResponseEntity<List<Parecer>> getAllByProcess(@PathVariable Long idProcesso) 
     {
-        List<Parecer> pareceres = parecerService.getAllByUsers(idProcesso); 
+        List<Parecer> pareceres = parecerService.getAllByProcess(idProcesso); 
         return !pareceres.isEmpty() ? ResponseEntity.ok(pareceres) : ResponseEntity.noContent().build();
     }
 	

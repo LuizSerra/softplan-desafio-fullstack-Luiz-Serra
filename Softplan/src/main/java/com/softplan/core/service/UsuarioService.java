@@ -73,7 +73,7 @@ public class UsuarioService {
 		
 	}
 
-	private Usuario findById(Long id) {
+	public Usuario findById(Long id) {
 		Usuario usuarioAtualizado = usuarioRepository.findOne(id);
 		if (usuarioAtualizado == null) {
 			throw new EmptyResultDataAccessException(1);

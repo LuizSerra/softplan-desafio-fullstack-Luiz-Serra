@@ -47,7 +47,7 @@ public class ProcessoService {
 		processoRepository.delete(processoEncontrado);
 	}
 	
-	private Processo findById(Long id) {
+	public Processo findById(Long id) {
 		Processo processoAtualizado = processoRepository.findOne(id);
 		if (processoAtualizado == null) {
 			throw new EmptyResultDataAccessException(1);
