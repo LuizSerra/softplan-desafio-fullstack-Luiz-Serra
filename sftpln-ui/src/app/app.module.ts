@@ -15,8 +15,10 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: 'processos', component: ProcessosPesquisaComponent},
   {path: 'processos/new', component: ProcessosCadastroComponent},
+  {path: 'processos/:id', component: ProcessosCadastroComponent},
   {path: 'usuarios', component: UsuariosPesquisaComponent},
   {path: 'usuarios/new', component: UsuariosCadastroComponent},
+  {path: 'usuarios/:id', component: UsuariosCadastroComponent},
 ]
 
 @NgModule({

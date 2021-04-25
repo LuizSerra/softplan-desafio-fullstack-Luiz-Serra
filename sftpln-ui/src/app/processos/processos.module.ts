@@ -13,6 +13,7 @@ import { PasswordModule } from 'primeng/password';
 import { PickListModule } from 'primeng/picklist';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -23,7 +24,8 @@ import { TooltipModule } from 'primeng/tooltip';
   ],
   imports: [
     CommonModule,
-
+    RouterModule,
+    
     FormsModule,
     InputTextModule,
     ButtonModule,

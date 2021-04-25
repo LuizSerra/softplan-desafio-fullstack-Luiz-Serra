@@ -33,7 +33,7 @@
                 <td>{{processo.nome}}</td>
                 <td>{{processo.descricao}}</td>
                 <td>
-                  <button type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" (click)="editar(processo)"></button>
+                  <a type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/processos', processo.id]"></a>
                   <button type="button" pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(processo)"></button>
                 </td>
             </tr>
@@ -41,7 +41,7 @@
     </p-table>
   </div>
   <div class="p-col-12">
-    <a pButton type="submit" label="Novo Processo"></a>
+    <a pButton label="Novo Processo" routerLink="/processos/new"></a>
   </div>
   
   </div>

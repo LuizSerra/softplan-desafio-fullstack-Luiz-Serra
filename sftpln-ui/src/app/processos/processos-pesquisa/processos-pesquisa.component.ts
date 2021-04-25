@@ -25,6 +25,7 @@ export class ProcessosPesquisaComponent implements OnInit {
     this.processoService.pesquisar().subscribe(resp => this.processos = resp);
   }
 
+  
   filtrar(filtro: String) {
     if(filtro && filtro != "") {
       this.processos = this.processos.filter(resp => resp.nome.toUpperCase().includes(filtro.toUpperCase()));

@@ -7,11 +7,11 @@
 
             <div class="p-field p-col-12 p-md-9">
                 <label>Nome</label>
-                <input type="text" pInputText name="nome" #nome [(ngModel)] ="processo.nome"  />
+                <input type="text" pInputText name="nome" #nome [(ngModel)] ="processo.nome" required />
             </div>
             <div class="p-field p-col-12 p-md-9">
                 <label class="p-col-12">Descrição</label>
-                <textarea pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" #nome [(ngModel)] ="processo.descricao"></textarea>
+                <textarea pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" #nome [(ngModel)] ="processo.descricao" required></textarea>
             </div>
             <div class=" p-field p-col-12 p-md-9" *ngIf="!triador">
                 <label class="p-col-12">Parecer</label>
@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class="p-col-12 p-md-10">
-            <button pButton type="button" label="Limpar" class="p-button-info"></button>
-            <button pButton type="submit" label="Salvar"></button>
+            <button pButton type="button" label="Novo" class="p-button-info" (click)="novo(processoForm)"></button>
+            <button pButton type="submit" label="Salvar" [disabled]="processoForm.invalid"></button>
             <a routerLink="/processos"> Voltar para a Listagem de Processos</a>
         </div>
     </form>
