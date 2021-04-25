@@ -1,9 +1,10 @@
-import { ProcessoService } from './../processo.service';
-import { Processo } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+
+import { ProcessoService } from 'src/app/core/services/processo.service';
+import { Processo } from './../../core/model';
 
 @Component({
   selector: 'app-processos-cadastro',

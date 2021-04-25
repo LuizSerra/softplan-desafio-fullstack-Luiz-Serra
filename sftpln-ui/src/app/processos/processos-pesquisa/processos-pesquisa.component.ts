@@ -1,7 +1,7 @@
 import { ConfirmationService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
-import { ProcessoService } from '../processo.service';
 import {MessageService} from 'primeng/api';
+import { ProcessoService } from 'src/app/core/services/processo.service';
 
 @Component({
   selector: 'app-processos-pesquisa',

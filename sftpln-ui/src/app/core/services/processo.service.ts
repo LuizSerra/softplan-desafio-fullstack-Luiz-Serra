@@ -1,9 +1,10 @@
-import { Processo } from './../core/model';
+
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { ErrorHandlerService } from '../core/error-handler.service';
+import { ErrorHandlerService } from '../error-handler.service';
+import { Processo } from '../model';
 
 @Injectable({
   providedIn: 'root'
