@@ -25,9 +25,14 @@ export class LoginComponent implements OnInit {
   login( usuario: string, senha: string) {
     this.auth.login(usuario, senha).subscribe(resp => { 
       this.armazenarToken(resp.access_token);
-      this.router.navigate(['/usuarios']); 
-    }
-    )
+      this.router.navigate(['/processos']); 
+    });
+}
+
+obterNovoAccessToken( usuario: string, senha: string) {
+  this.auth.obterNovoAccessToken().subscribe(resp => { 
+    this.armazenarToken(resp.access_token);
+  });
 }
 
 armazenarToken(token: string) {

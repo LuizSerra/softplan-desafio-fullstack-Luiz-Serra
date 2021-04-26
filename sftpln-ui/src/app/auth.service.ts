@@ -18,6 +18,7 @@ export class AuthService {
 
 
   ouathTokenUrl = "http://localhost:8080/oauth/token";
+  
 
   httpOptions = {
     headers: new HttpHeaders({ 'Authorization': 'Basic YW5ndWxhcjo0TkdVMTRS' , 'Content-Type':'application/x-www-form-urlencoded' }),
@@ -32,6 +33,15 @@ export class AuthService {
         retry(2),
         catchError(this.handleError.handleError));
     
+    }
+
+    obterNovoAccessToken(): Observable<any> {
+      
+      const body = `grant_type=refresh_token`;
+  
+      return this.http.post<any>(this.ouathTokenUrl, body,this.httpOptions).pipe(retry(2),
+      catchError(this.handleError.handleError));
+       
     }
 
     

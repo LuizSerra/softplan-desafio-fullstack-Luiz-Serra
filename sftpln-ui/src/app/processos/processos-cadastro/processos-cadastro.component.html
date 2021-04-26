@@ -13,12 +13,12 @@
                 <label class="p-col-12">Descrição</label>
                 <textarea pInputTextarea name="descricao" style="width: 100%; max-width: 100%;" #nome [(ngModel)] ="processo.descricao" required></textarea>
             </div>
-            <div class=" p-field p-col-12 p-md-9" *ngIf="!triador">
+            <div class=" p-field p-col-12 p-md-9" *ngIf="getFinalizador()">
                 <label class="p-col-12">Parecer</label>
-                <textarea pInputTextarea name="parecer" style="width: 100%; max-width: 100%;" ngModel></textarea>
+                <textarea pInputTextarea name="parecer" style="width: 100%; max-width: 100%;" #descricaoParecer [(ngModel)] ="parecerEdit.descricao"></textarea>
             </div>
 
-            <div class="p-field p-col-12  p-md-9" *ngIf="triador">
+            <div class="p-field p-col-12  p-md-9" *ngIf="getTriador()">
                 <h3>Selecionar usuário(s) para emitir parecer:</h3>
                 <p-pickList [source]="listaUsuariosOrigem" [target]="listaUsuariosDestino" sourceHeader="Disponíveis"
                     targetHeader="Selecionados" dragdrop="true" [responsive]="true" filterBy="nome"

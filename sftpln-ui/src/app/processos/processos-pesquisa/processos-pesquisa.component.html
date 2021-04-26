@@ -25,12 +25,14 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrição</th>
+                <th>Pendência</th>
                 <th style="width: 130px;">Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-processo>
-            <tr>
+            <tr >
                 <td>{{processo.nome}}</td>
+                <td>{{processo.descricao}}</td>
                 <td>{{processo.descricao}}</td>
                 <td>
                   <a type="button" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/processos', processo.id]"></a>

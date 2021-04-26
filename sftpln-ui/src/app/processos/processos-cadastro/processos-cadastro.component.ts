@@ -28,7 +28,7 @@ export class ProcessosCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.jwtPayload = this.jwtHelper.decodeToken(localStorage.getItem("token"));
     const processoId = this.route.snapshot.params['id'];
     this.title.setTitle('Cadastro de Processo');
     if (processoId) {
@@ -48,7 +48,7 @@ export class ProcessosCadastroComponent implements OnInit {
   listaUsuariosDestino = Array<Usuario>();
 
   processo = new Processo();
-  parecerEdit:Parecer;
+  parecerEdit= new Parecer();
 
   jwtPayload: any;
   get editando() {
@@ -77,7 +77,12 @@ export class ProcessosCadastroComponent implements OnInit {
 
   salvar(form: FormControl) {
     if (this.editando) {
-      this.atualizarProcesso(form);
+     if(this.getTriador() || this.getADM()) {
+       this.atualizarProcesso(form);
+    } else {
+      this.atualizarParecer(form);
+    } 
+       
     } else {
       this.adicionarProcesso(form);
     }
@@ -103,8 +108,19 @@ export class ProcessosCadastroComponent implements OnInit {
   }
 
   atualizarProcesso(form: FormControl) {
-    this.processoService.atualizar(this.processo).subscribe(processoAtualizado => { this.processo = processoAtualizado });
+    this.processoService.atualizar(this.processo).subscribe(processoAtualizado => { 
+      this.processo = processoAtualizado;
+      
+    });
+    
   }
+
+  atualizarParecer(form: FormControl) {
+    this.parecerEdit.id.idProcesso = this.processo.id;
+      console.log(`${this.parecerEdit.id.idProcesso} : ${this.parecerEdit.descricao}`);
+  }
+
+  
 
   novo(form: FormControl) {
     this.listaUsuariosDestino.map(e => console.log(e))
@@ -115,8 +131,17 @@ export class ProcessosCadastroComponent implements OnInit {
     this.router.navigate(['/processos/new']);
   }
 
-  get triador() {
-    this.jwtPayload = this.jwtHelper.decodeToken(localStorage.getItem("token"));
+  getTriador() {
+    
     return this.jwtPayload.authorities[0] === 'TRIADOR';
+  }
+
+  getADM() {
+    return this.jwtPayload.authorities[0] === 'ADM';
+  }
+
+
+  getFinalizador() {
+    return this.jwtPayload.authorities[0] === 'FINALIZADOR';
   }
 }
