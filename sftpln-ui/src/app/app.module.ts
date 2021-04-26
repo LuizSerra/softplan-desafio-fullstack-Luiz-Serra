@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ProcessosModule } from './processos/processos.module';
 import { CoreModule } from './core/core.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CoreModule } from './core/core.module';
     UsuariosModule,
     ProcessosModule,
     
-    AppRoutingModule
+    AppRoutingModule,
+    SegurancaModule
     
   ],
   providers: [],

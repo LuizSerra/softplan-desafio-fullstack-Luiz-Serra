@@ -8,8 +8,8 @@
         </div>
 
         <ul class="navbar-menu" [hidden]="!exibindoMenu">
-            <li class="navbar-usuario">Nome do Usuario</li>
-            <li class="navbar-menuitem" routerLinkActive="ativo">
+            <li class="navbar-usuario">{{ jwtPayload?.nome }}</li>
+            <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="jwtPayload?.authorities[0] === 'ADM'">
                 <a routerLink="/usuarios">Usuários</a>
             </li>
             <li class="navbar-menuitem" routerLinkActive="ativo">

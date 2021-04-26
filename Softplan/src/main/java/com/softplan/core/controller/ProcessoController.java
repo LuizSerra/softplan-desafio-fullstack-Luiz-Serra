@@ -36,7 +36,7 @@ public class ProcessoController {
 	@Autowired
 	ProcessoRepository processoRepository;
 	
-	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
+	@PreAuthorize("hasAnyAuthority('ADM', 'FINALIZADOR', 'TRIADOR')")
 	@GetMapping
     public ResponseEntity<List<Processo>> getAllUsers(
                         @RequestParam(defaultValue = "0") Integer pageNo, 
@@ -48,7 +48,7 @@ public class ProcessoController {
         return !processos.isEmpty() ? ResponseEntity.ok(processos) : ResponseEntity.noContent().build();
     }
 	
-	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
+	@PreAuthorize("hasAnyAuthority('ADM', 'FINALIZADOR', 'TRIADOR')")
 	@GetMapping("/{id}")
     public ResponseEntity<Processo> getByID(@PathVariable Long id) 
     {
@@ -56,7 +56,7 @@ public class ProcessoController {
 		return processoEncontrado != null ? ResponseEntity.ok().body(processoEncontrado) : ResponseEntity.notFound().build();
     }
 	
-	@PreAuthorize("hasAnyAuthority('TRIADOR')")
+	@PreAuthorize("hasAnyAuthority('ADM', 'TRIADOR')")
 	@PostMapping
 	public ResponseEntity<Processo> criar(@Valid @RequestBody Processo processo, HttpServletResponse response) {
 		
@@ -66,7 +66,7 @@ public class ProcessoController {
 		
 		return ResponseEntity.created(uri).body(processoCriado);
 	}
-	@PreAuthorize("hasAnyAuthority('TRIADOR')")
+	@PreAuthorize("hasAnyAuthority('ADM', 'TRIADOR')")
 	@PutMapping("/{id}")
 	public ResponseEntity<Processo> atualizar(@PathVariable Long id, @Valid @RequestBody Processo processo, HttpServletResponse response) {
 		Processo processoAtualizado = processoService.update(id, processo);

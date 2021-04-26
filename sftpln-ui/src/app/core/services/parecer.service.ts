@@ -17,8 +17,15 @@ export class ParecerService {
 
   url = "http://localhost:8080/pareceres"
 
+  //Usado na autenticação básica
+  // httpOptions = {
+  //   headers: new HttpHeaders({ 'Authorization': 'Basic YW5ndWxhcjo0TkdVMTRS' , 'Content-Type':'application/x-www-form-urlencoded' }),
+  //   withCredentials: true
+  // }
+
   httpOptions = {
-    headers: new HttpHeaders({ 'Authorization': 'Basic YWRtaW5Ac29mdHBsYW4uY29tOjEyMw==' })
+    headers: new HttpHeaders({ 'Authorization': `Bearer ${localStorage.getItem('token')}` , 'Content-Type':'application/x-www-form-urlencoded' }),
+    withCredentials: true
   }
 
   pesquisar(): Observable<any> {

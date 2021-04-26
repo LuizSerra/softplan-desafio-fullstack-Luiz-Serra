@@ -48,7 +48,7 @@ public class UsuarioController {
  
         return !usuarios.isEmpty() ? ResponseEntity.ok(usuarios) : ResponseEntity.noContent().build();
     }
-	@PreAuthorize("hasAnyAuthority('ADM', 'TRIADOR')")
+	@PreAuthorize("hasAnyAuthority('ADM', 'FINALIZADOR', 'TRIADOR')")
 	@GetMapping("/ativos")
     public ResponseEntity<List<Usuario>> getAllUsersActive(
                         @RequestParam(defaultValue = "0") Integer pageNo, 
@@ -60,7 +60,7 @@ public class UsuarioController {
         return !usuarios.isEmpty() ? ResponseEntity.ok(usuarios) : ResponseEntity.noContent().build();
     }
 	
-	@PreAuthorize("hasAnyAuthority('FINALIZADOR', 'TRIADOR')")
+	@PreAuthorize("hasAnyAuthority('ADM', 'FINALIZADOR', 'TRIADOR')")
 	@GetMapping("/{id}")
     public ResponseEntity<Usuario> getByID(@PathVariable Long id) 
     {

@@ -8,6 +8,7 @@ import { ProcessoService } from 'src/app/core/services/processo.service';
 import { IdParecer, Parecer, Processo, Usuario } from './../../core/model';
 import { literalArr } from '@angular/compiler/src/output/output_ast';
 import { ParecerService } from 'src/app/core/services/parecer.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-processos-cadastro',
@@ -22,7 +23,8 @@ export class ProcessosCadastroComponent implements OnInit {
     private router: Router,
     private processoService: ProcessoService,
     private usuarioService: UsuarioService,
-    private parecerService: ParecerService
+    private parecerService: ParecerService,
+    private jwtHelper: JwtHelperService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class ProcessosCadastroComponent implements OnInit {
   processo = new Processo();
   parecerEdit:Parecer;
 
+  jwtPayload: any;
   get editando() {
     return Boolean(this.processo.id);
   }
@@ -113,6 +116,7 @@ export class ProcessosCadastroComponent implements OnInit {
   }
 
   get triador() {
-    return Boolean(true);
+    this.jwtPayload = this.jwtHelper.decodeToken(localStorage.getItem("token"));
+    return this.jwtPayload.authorities[0] === 'TRIADOR';
   }
 }

@@ -18,11 +18,19 @@ export class ProcessoService {
 
   url = "http://localhost:8080/processos"
 
+  //Usado na autenticação básica
+  // httpOptions = {
+  //   headers: new HttpHeaders({ 'Authorization': 'Basic YW5ndWxhcjo0TkdVMTRS' , 'Content-Type':'application/x-www-form-urlencoded' }),
+  //   withCredentials: true
+  // }
+
   httpOptions = {
-    headers: new HttpHeaders({ 'Authorization': 'Basic YWRtaW5Ac29mdHBsYW4uY29tOjEyMw==' })
+    headers: new HttpHeaders({ 'Authorization': `Bearer ${localStorage.getItem('token')}`}),
+    withCredentials: true
   }
 
   pesquisar(): Observable<any> {
+    this.httpOptions.headers.append('Content-Type' ,'application/x-www-form-urlencoded');
     return this.http.get<any>(this.url, this.httpOptions)
       .pipe(
         retry(2),
@@ -30,6 +38,7 @@ export class ProcessoService {
   }
 
   buscarPorId(id:Number): Observable<any> {
+    this.httpOptions.headers.append('Content-Type' ,'application/x-www-form-urlencoded');
     return this.http.get<any>(`${this.url}/${id}`, this.httpOptions)
       .pipe(
         retry(2),
@@ -37,20 +46,21 @@ export class ProcessoService {
   }  
 
   salvar(processo: Processo): Observable<Processo> {
-    //this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
+    this.httpOptions.headers = this.httpOptions.headers.append('Content-Type', 'application/json');
 
     return this.http.post<Processo>(`${this.url}`, processo, this.httpOptions).pipe(
       catchError(this.handleError.handleError));;
   }
 
   atualizar(processo: Processo): Observable<Processo> {
-    //this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
+    this.httpOptions.headers = this.httpOptions.headers.append('Content-Type', 'application/json');
 
-    return this.http.post<Processo>(`${this.url}/${processo.id}`, processo, this.httpOptions).pipe(
+    return this.http.put<Processo>(`${this.url}/${processo.id}`, processo, this.httpOptions).pipe(
       catchError(this.handleError.handleError));;
   }
 
   excluir(id: number): Observable<void> {
+    this.httpOptions.headers = this.httpOptions.headers.append('Content-Type', 'application/json');
     return this.http.delete<void>(`${this.url}/${id}`, this.httpOptions).pipe(
       retry(2),
       catchError(this.handleError.handleError));;

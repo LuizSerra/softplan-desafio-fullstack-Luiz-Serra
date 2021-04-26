@@ -26,7 +26,7 @@ export class UsuariosPesquisaComponent implements OnInit {
   usuarios = [];
 
   pesquisar() {
-    this.usuarioService.pesquisar().subscribe((resp: Usuario[]) => this.usuarios = resp);
+    this.usuarioService.pesquisarAtivos().subscribe((resp: Usuario[]) => this.usuarios = resp);
   }
 
   filtrar(filtro: String) {

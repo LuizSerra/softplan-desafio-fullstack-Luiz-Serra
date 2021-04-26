@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './../../auth.service';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private router: Router,
-    ) { this.carregarToken()}
+    private jwtHelper: JwtHelperService
+    ) { this.carregarToken}
 
   ngOnInit(): void {
   }
@@ -23,14 +25,15 @@ export class LoginComponent implements OnInit {
   login( usuario: string, senha: string) {
     this.auth.login(usuario, senha).subscribe(resp => { 
       this.armazenarToken(resp.access_token);
-      this.router.navigate(['/processos']); 
+      this.router.navigate(['/usuarios']); 
     }
     )
 }
 
 armazenarToken(token: string) {
-  console.log(` aaaa ${JSON.stringify(this.jwtPayload)}`)
+  this.jwtPayload = this.jwtHelper.decodeToken(token);
   localStorage.setItem('token', token);
+  localStorage.setItem('role', this.jwtPayload.authorities[0]);
 }
 
 carregarToken() {
@@ -43,6 +46,19 @@ carregarToken() {
 limparAccessToken() {
   localStorage.removeItem('token');
   this.jwtPayload = null;
+}
+
+temPermissao(permissao: string) {
+  return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+}
+
+temQualquerPermissao(roles) {
+for (const role of roles) {
+  if (this.temPermissao(role)) {
+    return true;
+  }
+}
+return false;
 }
 
 }
