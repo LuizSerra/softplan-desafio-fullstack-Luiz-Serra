@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +14,7 @@ import { PasswordModule } from 'primeng/password';
 import { PickListModule } from 'primeng/picklist';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
-import { RouterModule } from '@angular/router';
+import { ProcessosRoutingModule } from './processos-routing.module';
 
 
 
@@ -24,7 +25,6 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule,
     FormsModule,
     
     InputTextModule,
@@ -35,11 +35,9 @@ import { RouterModule } from '@angular/router';
     DropdownModule,
     PasswordModule,
     PickListModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ProcessosRoutingModule
   ],
-  exports: [
-    ProcessosPesquisaComponent,
-    ProcessosCadastroComponent
-  ]
+  exports: []
 })
 export class ProcessosModule { }

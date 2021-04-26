@@ -1,3 +1,4 @@
+import { UsuariosRoutingModule } from './usuarios-routing.module';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,10 +37,9 @@ import { UsuariosPesquisaComponent } from './usuarios-pesquisa/usuarios-pesquisa
     DropdownModule,
     PasswordModule,
     InputTextareaModule,
+
+    UsuariosRoutingModule
   ],
-  exports: [
-    UsuariosCadastroComponent,
-    UsuariosPesquisaComponent
-  ]
+  exports: []
 })
 export class UsuariosModule { }

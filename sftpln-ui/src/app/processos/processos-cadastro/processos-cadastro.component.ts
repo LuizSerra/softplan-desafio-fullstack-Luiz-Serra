@@ -32,26 +32,21 @@ export class ProcessosCadastroComponent implements OnInit {
     if (processoId) {
       this.carregarProcesso(processoId);
     }
-
-    if (this.editando) {
-      this.carregarPareceres();
-    }
     else {
       this.carregaUsuarios();
     }
 
 
-    this.listaUsuariosOrigem =
-      this.listaUsuariosDestino = [];
+    this.listaUsuariosOrigem =  [];
+    this.listaUsuariosDestino = [];
   }
-
-  usuarios = []
 
   listaUsuariosOrigem = Array<Usuario>();
 
   listaUsuariosDestino = Array<Usuario>();
 
   processo = new Processo();
+  parecerEdit:Parecer;
 
   get editando() {
     return Boolean(this.processo.id);
@@ -70,8 +65,9 @@ export class ProcessosCadastroComponent implements OnInit {
   }
 
   carregarProcesso(processoId: number) {
-    this.processoService.buscarPorId(processoId).subscribe(resp => {
-      this.processo = resp
+    this.processoService.buscarPorId(processoId).subscribe((processoEncontrado:Processo) => {
+      this.processo = processoEncontrado;
+      
       this.atualizarTituloEdicao();
     });
   }
@@ -105,15 +101,6 @@ export class ProcessosCadastroComponent implements OnInit {
 
   atualizarProcesso(form: FormControl) {
     this.processoService.atualizar(this.processo).subscribe(processoAtualizado => { this.processo = processoAtualizado });
-  }
-
-
-
-
-  criarPendenciaParecer(processo: Processo) {
-    /*
-    Criar o servico de parecer e injetar nessa classe,
-    criar um parecer usando o id do processo retornado por funçao de criar/atualizar e cada id da lista usuarioDestino*/
   }
 
   novo(form: FormControl) {
