@@ -43,6 +43,7 @@ export class UsuariosCadastroComponent implements OnInit {
   carregarUsuario(usuarioId: number) {
     this.usuarioService.buscarPorId(usuarioId).subscribe((resp:Usuario) => {
       this.usuario = resp
+      this.permissaoSelecionada =this.usuario.permissoes[0];
     this.atualizarTituloEdicao();
     })
   }
@@ -71,6 +72,7 @@ export class UsuariosCadastroComponent implements OnInit {
   }
   
   novo(form: FormControl) {
+    console.log(this.usuario.permissoes[0].descricao)
     form.reset();
     setTimeout( function() {
       this.usuario = new Usuario();
